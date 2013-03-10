@@ -49,27 +49,27 @@ main = do
 benchBlock dbName conn (insert, insertItem, getUser, listUsers) =
   bgroup dbName 
   [
-    bgroup "~50000 users (large)" 
+    -- bgroup "~100 users (small)" 
+    -- [
+    --   bench "New Account" . whnfIO $ insert conn "password"
+    -- , bench "List Accounts" . whnfIO $ listUsers conn
+    -- , bench "Single Item Insert" . whnfIO $ insertItem conn 42
+    -- , bench "Account Query" . whnfIO $ getUser conn 42
+    -- ],
+    -- bgroup "~1000 users (medium)" 
+    -- [
+    --   bench "New Account" . whnfIO $ insert conn "password"
+    -- , bench "List Accounts" . whnfIO $ listUsers conn
+    -- , bench "Single Item Insert" . whnfIO $ insertItem conn 789
+    -- , bench "Account Query" . whnfIO $ getUser conn 789
+    -- ],
+    bgroup "~50000 users (large)"
     [
       bench "New Account" . whnfIO $ insert conn "password"
     , bench "List Accounts" . whnfIO $ listUsers conn
     , bench "Single Item Insert" . whnfIO $ insertItem conn 45678
     , bench "Account Query" . whnfIO $ getUser conn 45678
     ]
-  -- , bgroup "~1000 users (medium)" 
-  --   [
-  --     bench "Some New Accounts" . whnfIO $ mapM (insert conn) $ replicate 10 "password"
-  --   , bench "List Accounts" . whnfIO $ listUsers conn
-  --   , bench "Single Item Insert" . whnfIO $ insertItem conn 789
-  --   , bench "Account Query" . whnfIO $ getUser conn 789
-  --   ]
-  -- , bgroup "~100000 users (large)"
-  --   [
-  --     bench "Fuckton of New Accounts" . whnfIO $ mapM (insert conn) $ replicate 1000 "password"
-  --   , bench "List Accounts" . whnfIO $ listUsers conn
-  --   , bench "Single Item Insert" . whnfIO $ insertItem conn 56789
-  --   , bench "Account Query" . whnfIO $ getUser conn 56789
-  --   ]
   ]
 
 ----- AcidState
